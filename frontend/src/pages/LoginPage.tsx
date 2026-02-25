@@ -36,7 +36,7 @@ export function LoginPage({ onLogin }: { onLogin: (user: any) => void }) {
             <span className="bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent">HCM</span>
             <span className="text-white">Notify</span>
           </h1>
-          <p className="text-slate-500 text-sm">Admin Portal</p>
+          <p className="text-slate-500 text-sm">UKG Ready Monitoring & ETL Platform</p>
         </div>
 
         <form onSubmit={handleSubmit} className="bg-slate-900 border border-slate-800 rounded-xl p-6 space-y-4">
