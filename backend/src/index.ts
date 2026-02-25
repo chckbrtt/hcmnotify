@@ -9,6 +9,7 @@ import { tenantRoutes } from './routes/tenants';
 import { explorerRoutes } from './routes/explorer';
 import { activityRoutes } from './routes/activity';
 import { eventRoutes, webhookReceiver } from './routes/events';
+import { analysisRoutes } from './routes/analysis';
 
 dotenv.config();
 
@@ -51,6 +52,7 @@ app.use('/api/tenants', tenantRoutes);
 app.use('/api/explorer', explorerRoutes);
 app.use('/api/activity', activityRoutes);
 app.use('/api/events', eventRoutes);
+app.use('/api/analysis', analysisRoutes);
 app.use('/api', webhookReceiver);
 
 // Serve frontend

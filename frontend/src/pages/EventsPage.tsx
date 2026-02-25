@@ -38,11 +38,27 @@ function SeverityBadge({ severity }: { severity: string }) {
   );
 }
 
+interface Pattern {
+  type: string;
+  severity: string;
+  title: string;
+  description: string;
+  recommendation: string;
+}
+
+interface AnalysisResult {
+  patterns: Pattern[];
+  summary: { total: number; critical: number; warning: number };
+  analyzedEvents: number;
+}
+
 export function EventsPage() {
   const { data: events, refresh } = useApi<WebhookEvent[]>('/api/events', 10000);
   const { data: stats } = useApi<EventStats>('/api/events/stats', 10000);
+  const { data: analysis } = useApi<AnalysisResult>('/api/analysis/patterns', 30000);
   const [expanded, setExpanded] = useState<number | null>(null);
   const [filter, setFilter] = useState<string>('all');
+  const [showAnalysis, setShowAnalysis] = useState(true);
 
   const acknowledge = async (id: number) => {
     await fetch(`/api/events/${id}/acknowledge`, { method: 'POST', credentials: 'include' });
@@ -92,6 +108,50 @@ export function EventsPage() {
             <p className="text-xs text-cyan-400/60 mt-1">Today</p>
           </div>
         </div>
+      )}
+
+      {/* AI Pattern Analysis */}
+      {analysis && analysis.patterns.length > 0 && showAnalysis && (
+        <div className="bg-gradient-to-br from-purple-900/20 to-purple-900/5 border border-purple-600/30 rounded-xl overflow-hidden">
+          <div className="px-5 py-3 border-b border-purple-600/20 flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <span className="text-lg">🤖</span>
+              <h3 className="font-semibold text-purple-300">AI Pattern Analysis</h3>
+              <span className="text-xs bg-purple-600/20 text-purple-400 px-2 py-0.5 rounded">
+                {analysis.summary.total} pattern{analysis.summary.total !== 1 ? 's' : ''} detected
+              </span>
+            </div>
+            <button onClick={() => setShowAnalysis(false)} className="text-slate-500 hover:text-slate-300 text-xs">Hide</button>
+          </div>
+          <div className="p-4 space-y-3">
+            {analysis.patterns.map((p, i) => (
+              <div key={i} className={`p-4 rounded-lg border ${
+                p.severity === 'critical'
+                  ? 'bg-red-900/10 border-red-600/20'
+                  : 'bg-amber-900/10 border-amber-600/20'
+              }`}>
+                <div className="flex items-start gap-3">
+                  <span className="text-lg">{p.severity === 'critical' ? '🚨' : '⚠️'}</span>
+                  <div className="flex-1">
+                    <p className="font-medium text-sm">{p.title}</p>
+                    <p className="text-xs text-slate-400 mt-1">{p.description}</p>
+                    <div className="mt-2 flex items-start gap-2">
+                      <span className="text-xs text-cyan-500 font-medium">💡 Recommendation:</span>
+                      <span className="text-xs text-slate-400">{p.recommendation}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+            <p className="text-xs text-slate-600 text-center">Analyzed {analysis.analyzedEvents} events · Pattern engine v0.1</p>
+          </div>
+        </div>
+      )}
+
+      {!showAnalysis && analysis && analysis.patterns.length > 0 && (
+        <button onClick={() => setShowAnalysis(true)} className="text-xs text-purple-400 hover:text-purple-300">
+          🤖 Show AI Analysis ({analysis.summary.total} patterns)
+        </button>
       )}
 
       {/* Filter Tabs */}
