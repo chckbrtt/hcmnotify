@@ -107,11 +107,28 @@ function initSchema(db: Database.Database): void {
     console.log('[DB] Seeded admin users (admin/admin123, chuck/admin123)');
   }
 
+  // Seed Merbree tenant if empty
+  const tenantCount = db.prepare('SELECT COUNT(*) as c FROM tenants').get() as any;
+  if (tenantCount.c === 0) {
+    seedMerbreeTenant(db);
+  }
+
   // Seed demo webhook events if empty
   const evtCount = db.prepare('SELECT COUNT(*) as c FROM webhook_events').get() as any;
   if (evtCount.c === 0) {
     seedDemoEvents(db);
   }
+}
+
+function seedMerbreeTenant(db: Database.Database): void {
+  const { encrypt } = require('../services/crypto');
+  const { v4: uuid } = require('uuid');
+  const id = uuid();
+  db.prepare(`
+    INSERT INTO tenants (id, name, company_short, base_url, api_key_enc, username, password_enc, status, created_by)
+    VALUES (?, 'Merbree / MoMer', 'MOMER0059', 'https://secure2.saashr.com/ta/rest', ?, 'reportuser', ?, 'pending', 'system')
+  `).run(id, encrypt('db4kwjw6x498ui8kjptna7vr0grkqcil'), encrypt('Ar4cMFQG.84k!F'));
+  console.log('[DB] Seeded Merbree tenant');
 }
 
 function seedDemoEvents(db: Database.Database): void {
