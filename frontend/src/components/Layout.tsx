@@ -4,6 +4,7 @@ const navItems = [
   { to: '/', icon: '📊', label: 'Dashboard' },
   { to: '/tenants', icon: '🏢', label: 'Tenants' },
   { to: '/explorer', icon: '🔌', label: 'API Explorer' },
+  { to: '/events', icon: '🔔', label: 'Events' },
 ];
 
 export function Layout({ user, onLogout }: { user: any; onLogout: () => void }) {

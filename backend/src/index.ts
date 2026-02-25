@@ -8,6 +8,7 @@ import { authRoutes } from './routes/auth';
 import { tenantRoutes } from './routes/tenants';
 import { explorerRoutes } from './routes/explorer';
 import { activityRoutes } from './routes/activity';
+import { eventRoutes, webhookReceiver } from './routes/events';
 
 dotenv.config();
 
@@ -49,6 +50,8 @@ app.use('/api', (_req, res, next) => {
 app.use('/api/tenants', tenantRoutes);
 app.use('/api/explorer', explorerRoutes);
 app.use('/api/activity', activityRoutes);
+app.use('/api/events', eventRoutes);
+app.use('/api', webhookReceiver);
 
 // Serve frontend
 const frontendPath = path.join(__dirname, '..', 'public');
