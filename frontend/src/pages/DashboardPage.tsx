@@ -6,6 +6,13 @@ interface Stats {
   recentActivity: any[];
 }
 
+interface EventStats {
+  total: number;
+  critical: number;
+  unacknowledged: number;
+  today: number;
+}
+
 function StatCard({ label, value, color = 'blue' }: { label: string; value: string | number; color?: string }) {
   const colors: Record<string, string> = {
     blue: 'from-blue-600/20 to-blue-600/5 border-blue-600/30 text-blue-400',
@@ -35,6 +42,7 @@ function actionIcon(action: string): string {
 
 export function DashboardPage() {
   const { data: stats, loading } = useApi<Stats>('/api/activity/stats', 30000);
+  const { data: eventStats } = useApi<EventStats>('/api/events/stats', 15000);
 
   if (loading || !stats) {
     return <div className="text-slate-500 text-center py-20">Loading dashboard...</div>;
@@ -47,12 +55,27 @@ export function DashboardPage() {
         <p className="text-slate-500 text-sm">Platform overview & health</p>
       </div>
 
+      {/* Alert Banner */}
+      {eventStats && eventStats.critical > 0 && (
+        <a href="/events" className="block bg-gradient-to-r from-red-900/40 to-red-900/10 border border-red-600/40 rounded-xl p-5 animate-pulse hover:from-red-900/50 transition-all">
+          <div className="flex items-center gap-4">
+            <span className="text-3xl">🚨</span>
+            <div>
+              <p className="font-bold text-red-400 text-lg">{eventStats.critical} Critical Alert{eventStats.critical > 1 ? 's' : ''}</p>
+              <p className="text-red-400/70 text-sm">{eventStats.unacknowledged} unacknowledged events require attention</p>
+            </div>
+            <span className="ml-auto text-red-400/50 text-sm">View Events →</span>
+          </div>
+        </a>
+      )}
+
       {/* Stats Grid */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
         <StatCard label="Total Tenants" value={stats.tenants.total} color="blue" />
         <StatCard label="Active" value={stats.tenants.active} color="green" />
         <StatCard label="Errors" value={stats.tenants.error} color="red" />
         <StatCard label="API Calls Today" value={stats.apiCalls.today} color="cyan" />
+        <StatCard label="Events Today" value={eventStats?.today || 0} color="orange" />
       </div>
 
       {/* Quick Actions */}

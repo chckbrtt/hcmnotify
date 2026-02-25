@@ -6,6 +6,7 @@ import { DashboardPage } from './pages/DashboardPage';
 import { TenantsPage } from './pages/TenantsPage';
 import { ApiExplorerPage } from './pages/ApiExplorerPage';
 import { EventsPage } from './pages/EventsPage';
+import { SettingsPage } from './pages/SettingsPage';
 
 export default function App() {
   const [user, setUser] = useState<any>(null);
@@ -37,6 +38,7 @@ export default function App() {
         <Route path="/tenants" element={<TenantsPage />} />
         <Route path="/explorer" element={<ApiExplorerPage />} />
         <Route path="/events" element={<EventsPage />} />
+        <Route path="/settings" element={<SettingsPage />} />
       </Route>
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>

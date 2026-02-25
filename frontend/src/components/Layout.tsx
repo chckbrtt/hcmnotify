@@ -1,14 +1,17 @@
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
+import { useApi } from '../hooks/useApi';
 
 const navItems = [
   { to: '/', icon: '📊', label: 'Dashboard' },
   { to: '/tenants', icon: '🏢', label: 'Tenants' },
   { to: '/explorer', icon: '🔌', label: 'API Explorer' },
   { to: '/events', icon: '🔔', label: 'Events' },
+  { to: '/settings', icon: '⚙️', label: 'Settings' },
 ];
 
 export function Layout({ user, onLogout }: { user: any; onLogout: () => void }) {
   const navigate = useNavigate();
+  const { data: eventStats } = useApi<{ unacknowledged: number; critical: number }>('/api/events/stats', 15000);
 
   const handleLogout = async () => {
     await fetch('/api/auth/logout', { method: 'POST', credentials: 'include' });
@@ -44,6 +47,13 @@ export function Layout({ user, onLogout }: { user: any; onLogout: () => void }) 
             >
               <span className="text-lg">{item.icon}</span>
               {item.label}
+              {item.to === '/events' && eventStats && eventStats.unacknowledged > 0 && (
+                <span className={`ml-auto text-xs px-1.5 py-0.5 rounded-full font-bold ${
+                  eventStats.critical > 0 ? 'bg-red-600 text-white animate-pulse' : 'bg-blue-600 text-white'
+                }`}>
+                  {eventStats.unacknowledged}
+                </span>
+              )}
             </NavLink>
           ))}
         </nav>
