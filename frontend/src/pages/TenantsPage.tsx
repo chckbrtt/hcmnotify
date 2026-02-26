@@ -210,6 +210,9 @@ export function TenantsPage() {
                       <button onClick={() => runDiscovery(t.id)} className="text-cyan-400 hover:text-cyan-300 text-xs font-medium">
                         🔍 Discover
                       </button>
+                      <a href={`/portal/${t.id}`} className="text-purple-400 hover:text-purple-300 text-xs font-medium">
+                        🖥️ Client View
+                      </a>
                       <button onClick={() => openEdit(t)} className="text-blue-400 hover:text-blue-300 text-xs font-medium">
                         ✏️ Edit
                       </button>

@@ -11,12 +11,14 @@ eventRoutes.get('/', (req: Request, res: Response) => {
   const limit = parseInt(req.query.limit as string) || 50;
   const severity = req.query.severity as string;
   const status = req.query.status as string;
+  const tenantId = req.query.tenantId as string;
 
   let where = 'WHERE 1=1';
   const params: any[] = [];
 
   if (severity) { where += ' AND e.severity = ?'; params.push(severity); }
   if (status) { where += ' AND e.status = ?'; params.push(status); }
+  if (tenantId) { where += ' AND (e.tenant_id = ? OR e.company_id = (SELECT company_id FROM tenants WHERE id = ?) OR e.company_id = (SELECT company_short FROM tenants WHERE id = ?))'; params.push(tenantId, tenantId, tenantId); }
 
   params.push(limit);
 

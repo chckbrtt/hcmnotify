@@ -7,6 +7,7 @@ import { TenantsPage } from './pages/TenantsPage';
 import { ApiExplorerPage } from './pages/ApiExplorerPage';
 import { EventsPage } from './pages/EventsPage';
 import { SettingsPage } from './pages/SettingsPage';
+import { ClientPortalPage } from './pages/ClientPortalPage';
 
 export default function App() {
   const [user, setUser] = useState<any>(null);
@@ -40,6 +41,7 @@ export default function App() {
         <Route path="/events" element={<EventsPage />} />
         <Route path="/settings" element={<SettingsPage />} />
       </Route>
+      <Route path="/portal/:tenantId" element={<ClientPortalPage />} />
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );
