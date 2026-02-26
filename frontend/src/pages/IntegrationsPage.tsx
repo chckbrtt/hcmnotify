@@ -148,6 +148,20 @@ const categories: Category[] = [
     ],
   },
   {
+    id: 'separation_compliance',
+    name: 'Separation & Compliance Docs',
+    icon: '📝',
+    description: 'State-mandated separation notices, COBRA, and termination document automation — triggered by UKG term events in real-time',
+    integrations: [
+      { name: 'State Separation Notices', description: 'Auto-generate state-specific separation forms on termination. Colorado SB 22-234, Georgia DOL-800, Tennessee LB-0489, and 15+ other state forms. Pre-filled with employee data, reason for separation, salary, and UI filing instructions.', logo: '📋', status: 'available', popular: true },
+      { name: 'COBRA Administration', description: 'Automated COBRA qualifying event notifications on termination or hours reduction. Generate election forms, track deadlines, and sync with benefits carriers.', logo: '🏥', status: 'available' },
+      { name: 'Final Pay Compliance', description: 'State-specific final paycheck deadline tracking. Colorado requires immediate pay on involuntary term. Auto-alerts payroll team with deadline and required amounts.', logo: '💰', status: 'available' },
+      { name: 'Thomas & Company', description: 'Unemployment claims management integration. Auto-submit separation data, respond to UI claims, and track hearing schedules.', logo: '🔵', status: 'beta' },
+      { name: 'WARN Act Monitoring', description: 'Track headcount changes across locations. Auto-alert when layoff thresholds approach WARN Act notification requirements (60-day notice for 100+ employees).', logo: '⚠️', status: 'beta' },
+      { name: 'Document Delivery & E-Signature', description: 'Auto-deliver separation packets via email or DocuSign. Track acknowledgment, store signed copies, and maintain audit trail per state requirements.', logo: '✍️', status: 'coming_soon' },
+    ],
+  },
+  {
     id: 'file_transfer',
     name: 'File Transfer (SFTP)',
     icon: '📁',
