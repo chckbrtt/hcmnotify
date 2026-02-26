@@ -132,6 +132,22 @@ const categories: Category[] = [
     ],
   },
   {
+    id: 'tax_compliance',
+    name: 'Tax & Compliance',
+    icon: '📑',
+    description: 'Tax filing, garnishment processing, and compliance platforms — beyond what MasterTax/Sovos handles natively in UKG',
+    integrations: [
+      { name: 'Sovos (MasterTax)', description: 'Enhanced integration beyond native UKG module. Custom tax filing feeds, amendment tracking, and multi-EIN reconciliation for complex org structures.', logo: '🔵', status: 'available', popular: true },
+      { name: 'ADP SmartCompliance', description: 'Tax credits, employment verification, wage garnishments, and unemployment claims. Automated data feeds from UKG employee and payroll records.', logo: '🔴', status: 'available' },
+      { name: 'Paycom Tax Services', description: 'W-2/1099 processing, quarterly tax filing, and amended return automation with UKG payroll data feeds.', logo: '🟢', status: 'available' },
+      { name: 'Symmetry Tax Engine', description: 'Real-time tax calculation API. Multi-state withholding, supplemental wages, and reciprocity agreement automation.', logo: '🟣', status: 'beta' },
+      { name: 'WGSS (Wage Garnishment)', description: 'Automated garnishment order processing. Child support, tax levies, creditor garnishments — intake orders, calculate withholding, generate remittance files.', logo: '⚖️', status: 'beta' },
+      { name: 'Experian Employer Services', description: 'Employment & income verification (VOE/VOI), unemployment cost management, and tax credit screening.', logo: '🔵', status: 'coming_soon' },
+      { name: 'Thomson Reuters ONESOURCE', description: 'Enterprise tax compliance with multi-jurisdiction filing, nexus analysis, and year-end reporting automation.', logo: '🟠', status: 'coming_soon' },
+      { name: 'Vertex', description: 'Payroll tax calculation and compliance for complex multi-state employers. Rate updates and jurisdiction mapping.', logo: '🔵', status: 'coming_soon' },
+    ],
+  },
+  {
     id: 'file_transfer',
     name: 'File Transfer (SFTP)',
     icon: '📁',
