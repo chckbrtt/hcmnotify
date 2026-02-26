@@ -7,6 +7,7 @@ import { TenantsPage } from './pages/TenantsPage';
 import { ApiExplorerPage } from './pages/ApiExplorerPage';
 import { EventsPage } from './pages/EventsPage';
 import { SettingsPage } from './pages/SettingsPage';
+import { IntegrationsPage } from './pages/IntegrationsPage';
 import { ClientPortalPage } from './pages/ClientPortalPage';
 
 export default function App() {
@@ -38,6 +39,7 @@ export default function App() {
         <Route path="/" element={<DashboardPage />} />
         <Route path="/tenants" element={<TenantsPage />} />
         <Route path="/explorer" element={<ApiExplorerPage />} />
+        <Route path="/integrations" element={<IntegrationsPage />} />
         <Route path="/events" element={<EventsPage />} />
         <Route path="/settings" element={<SettingsPage />} />
       </Route>

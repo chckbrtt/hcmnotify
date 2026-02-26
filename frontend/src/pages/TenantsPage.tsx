@@ -213,6 +213,9 @@ export function TenantsPage() {
                       <a href={`/portal/${t.id}`} className="text-purple-400 hover:text-purple-300 text-xs font-medium">
                         🖥️ Client View
                       </a>
+                      <a href="/integrations" className="text-amber-400 hover:text-amber-300 text-xs font-medium">
+                        🔗 Integrations
+                      </a>
                       <button onClick={() => openEdit(t)} className="text-blue-400 hover:text-blue-300 text-xs font-medium">
                         ✏️ Edit
                       </button>
