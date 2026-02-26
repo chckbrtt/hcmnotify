@@ -135,7 +135,12 @@ export function ApiExplorerPage() {
   const selectPreset = (endpoint: PresetEndpoint) => {
     setMethod(endpoint.method);
     let p = endpoint.path;
-    // Handle params
+    // Auto-fill {cid} with tenant's company_id
+    const currentTenant = tenants?.find(t => t.id === selectedTenant);
+    if (currentTenant?.company_id) {
+      p = p.replace(/\{cid\}/g, currentTenant.company_id);
+    }
+    // Handle other params
     if (endpoint.params) {
       for (const param of endpoint.params) {
         const val = prompt(`Enter ${param.label}:`, '');
