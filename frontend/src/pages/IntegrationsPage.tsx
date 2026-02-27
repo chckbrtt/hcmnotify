@@ -148,6 +148,20 @@ const categories: Category[] = [
     ],
   },
   {
+    id: 'document_mgmt',
+    name: 'Document Management',
+    icon: '🗂️',
+    description: 'Employee document lifecycle — bulk export on termination, mass onboarding upload, and legacy archive vaults',
+    integrations: [
+      { name: 'Termination Document Package', description: 'Bulk export all employee documents on client termination. W-2s, I-9s, signed handbooks, offer letters — auto-packaged as ZIP per employee via UKG document API. No more clicking one-by-one.', logo: '📦', status: 'available', popular: true },
+      { name: 'Onboarding Doc Upload', description: 'Mass document upload for new client onboarding. Auto-generate metadata.csv, map files to employee accounts, chunk into 200MB ZIPs per UKG limits, and push with validation.', logo: '📤', status: 'available', popular: true },
+      { name: 'Legacy Archive Vault', description: 'Read-only document archive for legacy payroll data that can\'t migrate to UKG. Pay statements, tax forms, benefits docs — searchable by employee, date, or doc type. Like an Exchange archive mailbox for HR.', logo: '🏛️', status: 'beta' },
+      { name: 'Employee Self-Service Portal', description: 'Give employees access to their archived documents without HR involvement. SSO integration, mobile-friendly, audit-logged downloads. "Where\'s my 2023 W-2?" — solved.', logo: '👤', status: 'beta' },
+      { name: 'Document Retention Engine', description: 'Automated retention policies by document type. I-9s retained 3 years after term (or 1 year after hire, whichever is later). Auto-purge with compliance audit trail.', logo: '⏰', status: 'coming_soon' },
+      { name: 'OCR & Classification', description: 'AI-powered document scanning and auto-classification. Upload a folder of mixed docs — AI identifies W-2s, I-9s, offer letters, and auto-tags with employee ID and doc type.', logo: '🤖', status: 'coming_soon' },
+    ],
+  },
+  {
     id: 'separation_compliance',
     name: 'Separation & Compliance Docs',
     icon: '📝',
