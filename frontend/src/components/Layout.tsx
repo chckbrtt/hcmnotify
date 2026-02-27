@@ -6,6 +6,7 @@ const navItems = [
   { to: '/tenants', icon: '🏢', label: 'Tenants' },
   { to: '/explorer', icon: '🔌', label: 'API Explorer' },
   { to: '/integrations', icon: '🔗', label: 'Integrations' },
+  { to: '/pipeline', icon: '⚡', label: 'Pipeline Builder' },
   { to: '/events', icon: '🔔', label: 'Events' },
   { to: '/settings', icon: '⚙️', label: 'Settings' },
 ];

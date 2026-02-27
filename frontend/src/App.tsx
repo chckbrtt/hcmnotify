@@ -9,6 +9,7 @@ import { EventsPage } from './pages/EventsPage';
 import { SettingsPage } from './pages/SettingsPage';
 import { IntegrationsPage } from './pages/IntegrationsPage';
 import { ClientPortalPage } from './pages/ClientPortalPage';
+import { PipelineBuilderPage } from './pages/PipelineBuilderPage';
 
 export default function App() {
   const [user, setUser] = useState<any>(null);
@@ -40,6 +41,7 @@ export default function App() {
         <Route path="/tenants" element={<TenantsPage />} />
         <Route path="/explorer" element={<ApiExplorerPage />} />
         <Route path="/integrations" element={<IntegrationsPage />} />
+        <Route path="/pipeline" element={<PipelineBuilderPage />} />
         <Route path="/events" element={<EventsPage />} />
         <Route path="/settings" element={<SettingsPage />} />
       </Route>
